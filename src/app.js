@@ -1,8 +1,10 @@
 const express = require('express')
-const app = express()
-const errorHandler = require('./middlewares/error')
 const cors = require('cors')
 const morgan = require('morgan')
+const errorHandler = require('./middlewares/error')
+const router = require('./routes/index')
+
+const app = express()
 
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ limit: '10mb', extended: true }))
@@ -13,6 +15,8 @@ app.use(morgan('dev'))
 app.get('/', (req, res) => {
     res.send('Hello World')
 })
+
+app.use(router)
 
 app.use(errorHandler)
 

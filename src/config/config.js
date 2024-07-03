@@ -4,5 +4,8 @@ const path = require('path')
 dotenv.config({ path: path.join(__dirname, '../../.env')})
 
 module.exports = {
-    port: process.env.PORT
+    port: process.env.PORT,
+    gemini: {
+        key: process.env.GEMINI_KEY
+    }
 }
