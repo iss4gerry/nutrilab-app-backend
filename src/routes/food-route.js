@@ -3,6 +3,6 @@ const foodController = require('../controllers/food-controller')
 const router = express.Router()
 
 router  
-    .route('/').post(foodController.foodTracker)
+    .route('/nutrition').post(foodController.foodTracker)
 
 module.exports = router
