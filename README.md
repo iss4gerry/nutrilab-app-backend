@@ -19,7 +19,6 @@
 User Register: `POST /auth/register`\
 User Login: `POST /auth/login`
 
-
 **- Food Route** \
 Food Tracker      : `POST /food/nutrition`\
 
