@@ -16,7 +16,7 @@ const foodTracker = async (body) => {
         kirim response dengan format string persis seperti dibawah ini tanpa tambahan apapun
         {
             "foodName": "{food_name}",
-            "foodInformation": "{food_information_dalambahasaindonesia_minimal25kata}",
+            "foodInformation": "{food_information_dalambahasaindonesia_minimal25kata_maksimal30kata}",
             "calorie": "{calorie_count_kkal}",
             "sugar": "{sugar_content_grams}",
             "carbohydrate": "{carbohydrate_content_grams}"
