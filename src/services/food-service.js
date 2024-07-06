@@ -7,10 +7,6 @@ const genAi = new GoogleGenerativeAI(apiKey)
 
 const foodTracker = async (body) => {
     return new Promise((resolve, reject) => {
-        if(!body.foodName){
-            throw new ApiError(httpStatus.BAD_REQUEST, 'No data provided')
-        }
-
         const model = genAi.getGenerativeModel({model: 'gemini-1.5-flash'})
         const prompt = `dari makanan ${body.foodName} analisis kandungan nutrisinya dengan nilai tetap (tanpa menggunakan rentang) dan tanpa menggunakan satuan (misalnya gram, kkal, dll) hanya gunakan angka total nutrisi yang terkandung. Jika ada yang tidak punya nilai isi dengan 0, 
         kirim response dengan format string persis seperti dibawah ini tanpa tambahan apapun
