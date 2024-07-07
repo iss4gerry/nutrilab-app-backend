@@ -1,7 +1,7 @@
 const httpStatus = require('http-status')
 const prisma = require('../../prisma/index')
 const ApiError = require('../utils/apiError')
-const { calculateDailyNutrition } = require('../utils/nutritionUtils')
+const { calculateDailyNutrition, calculateProgressNutrition } = require('../utils/nutritionUtils')
 
 const createProfile = async (body) => {
     try {
@@ -30,17 +30,34 @@ const createProfile = async (body) => {
     
 }
 
-const getTotalNutrition = async (body) => {
+const getTotalNutrition = async (userId) => {
     const user = await prisma.userProfile.findFirst({
         where: {
-            userId: body.userId
+            userId: userId
         }
     })
 
     return calculateDailyNutrition(user)
 }
 
+const getProgressNutrition = async (userId) => {
+    const user = await prisma.userProfile.findFirst({
+        where: {
+            userId: userId
+        }
+    })
+
+    const nutrition = await prisma.nutrition.findFirst({
+        where: {
+            userId: userId
+        }
+    })
+
+    return calculateProgressNutrition(user, nutrition)
+}
+
 module.exports = {
     createProfile,
-    getTotalNutrition
+    getTotalNutrition,
+    getProgressNutrition
 }

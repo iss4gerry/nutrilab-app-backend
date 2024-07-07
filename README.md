@@ -20,8 +20,9 @@ User Register: `POST /auth/register`\
 User Login: `POST /auth/login`\
 
 **- Profile Route** \
-Create Profile        : `POST /profile`\
-User Total Nutrition  : `GET /profile/nutrition`\
+Create Profile           : `POST /profile`\
+User Total Nutrition     : `GET /profile/nutrition/:userId`\
+User Progress Nutrition  : `GET /profile/nutrition/progress/:userId`\
 
 **- Food Route** \
 Food Tracker      : `POST /food/nutrition`\
@@ -135,6 +136,22 @@ foodName            (string, required)
     "dailyFat": 315.1532,
     "dailyCarbohydrate": 236.3649,
     "dailySugar": 50
+  }
+}
+```
+
+
+**Get Progress Nutrition -> GET /profile/nutrition/progress/:userId**
+```json
+{
+  "status": 200,
+  "message": "Success",
+  "data": {
+    "totalCalories": 0,
+    "totalCarbohydrate": 0,
+    "totalProtein": 0,
+    "totalFat": 0,
+    "totalSugar": 0
   }
 }
 ```

@@ -8,4 +8,7 @@ router
 router  
     .route('/nutrition/:userId').get(profileController.getTotalNutrition)
 
+router
+    .route('/nutrition/progress/:userId').get(profileController.getProgressNutrition)
+
 module.exports = router

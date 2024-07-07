@@ -29,11 +29,11 @@ const calculateDailyNutrition = (user) => {
   }
 }
 
-const calculateTotalNutrition = (user, nutritionLeft) => {
+const calculateProgressNutrition = (user, nutritionLeft) => {
   const dailyNutrition = calculateDailyNutrition(user)
   const totalCalories = Math.round(dailyNutrition.dailyCalorie - nutritionLeft.dailyCalorie)
   const totalCarbohydrate = Math.round(dailyNutrition.dailyCarbohydrate - nutritionLeft.dailyCarbohydrate)
-  const totalProtein = Math.round(dailyNutrition.dailyProteins - nutritionLeft.dailyProtein)
+  const totalProtein = Math.round(dailyNutrition.dailyProtein - nutritionLeft.dailyProtein)
   const totalFat = Math.round(dailyNutrition.dailyFat - nutritionLeft.dailyFat)
   const totalSugar = Math.round(dailyNutrition.dailySugar - nutritionLeft.dailySugar)
 
@@ -49,5 +49,5 @@ const calculateTotalNutrition = (user, nutritionLeft) => {
 module.exports = { 
   calculateCalories, 
   calculateDailyNutrition,
-  calculateTotalNutrition
+  calculateProgressNutrition
 }
