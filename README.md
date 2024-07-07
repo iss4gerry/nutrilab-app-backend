@@ -17,7 +17,11 @@
 
 **- AUTH Route** \
 User Register: `POST /auth/register`\
-User Login: `POST /auth/login`
+User Login: `POST /auth/login`\
+
+**- Profile Route** \
+Create Profile        : `POST /profile`\
+User Total Nutrition  : `GET /profile/nutrition`\
 
 **- Food Route** \
 Food Tracker      : `POST /food/nutrition`\
@@ -87,6 +91,54 @@ foodName            (string, required)
   }
 }
 ```
+
+**Create Profile -> POST /profile/**
+```json
+{
+  "status": 200,
+  "message": "Success",
+  "data": {
+    "profile": {
+      "id": "bbea0edc-0831-485e-8592-37099e9959ad",
+      "userId": "5fb3aa47-f976-4781-9c95-a6e65e8d9194",
+      "gender": "male",
+      "dateOfBirth": "2003-12-20",
+      "allergies": "Tidak Punya",
+      "weight": 57,
+      "height": 172,
+      "createdAt": "2024-07-07T04:13:33.490Z",
+      "updatedAt": "2024-07-07T04:13:33.490Z"
+    },
+    "dailyNutrition": {
+      "id": "6d5c96c4-4d10-4577-aad8-00bd18646e17",
+      "userId": "5fb3aa47-f976-4781-9c95-a6e65e8d9194",
+      "dailyCalorie": 1575.766,
+      "dailyCarbohydrate": 236.3649,
+      "dailySugar": 50,
+      "dailyFat": 315.1532,
+      "dailyProtein": 45.6,
+      "createdAt": "2024-07-07T04:13:34.551Z",
+      "updatedAt": "2024-07-07T04:13:34.551Z"
+    }
+  }
+}
+```
+
+**Get Total Nutrition -> GET /profile/nutrition/:userId**
+```json
+{
+  "status": 200,
+  "message": "Success",
+  "data": {
+    "dailyCalorie": 1575.766,
+    "dailyProtein": 45.6,
+    "dailyFat": 315.1532,
+    "dailyCarbohydrate": 236.3649,
+    "dailySugar": 50
+  }
+}
+```
+
 **Food Tracker -> POST /food/nutrition**
 ```JSON
 {
@@ -102,4 +154,6 @@ foodName            (string, required)
     "protein": "25"
   }
 }
+```
+
 

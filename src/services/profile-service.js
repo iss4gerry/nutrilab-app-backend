@@ -30,6 +30,17 @@ const createProfile = async (body) => {
     
 }
 
+const getTotalNutrition = async (body) => {
+    const user = await prisma.userProfile.findFirst({
+        where: {
+            userId: body.userId
+        }
+    })
+
+    return calculateDailyNutrition(user)
+}
+
 module.exports = {
-    createProfile
+    createProfile,
+    getTotalNutrition
 }

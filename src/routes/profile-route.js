@@ -5,4 +5,7 @@ const router = express.Router()
 router  
     .route('/').post(profileController.createProfile)
 
+router  
+    .route('/nutrition/:userId').get(profileController.getTotalNutrition)
+
 module.exports = router
