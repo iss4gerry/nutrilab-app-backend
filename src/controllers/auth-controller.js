@@ -13,7 +13,7 @@ const register = catchAsync(async (req, res) => {
 })
 
 const login = catchAsync(async (req, res) => {
-    const result = await authService.login(req.body)
+    const result = await authService.login(req.body, res)
 
     res.status(httpStatus.OK).send({
         status: httpStatus.OK,

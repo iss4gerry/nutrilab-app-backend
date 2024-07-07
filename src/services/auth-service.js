@@ -2,6 +2,7 @@ const httpStatus = require('http-status')
 const prisma = require('../../prisma/index')
 const bcrypt = require('bcryptjs')
 const ApiError = require('../utils/apiError')
+const generateToken = require('./token-service')
 
 
 const existingUser = async (email) => {
@@ -26,7 +27,7 @@ const register = async (body) => {
     })
 }
 
-const login = async (body) => {
+const login = async (body, res) => {
     const user = await existingUser(body.email)
     if(!user){
         throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password')
@@ -36,6 +37,9 @@ const login = async (body) => {
     if(!validPassword){
         throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password')
     }
+
+    const token = generateToken(user)
+    res.setHeader('Authorization', `Bearer ${token}`)
 
     return user
 }

@@ -7,5 +7,8 @@ module.exports = {
     port: process.env.PORT,
     gemini: {
         key: process.env.GEMINI_KEY
+    },
+    jwt: {
+        secret: process.env.JWT_SECRET
     }
 }
