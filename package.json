@@ -23,7 +23,7 @@
     "morgan": "^1.10.0",
     "prisma": "^5.16.1",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^4.6.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
