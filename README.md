@@ -25,7 +25,7 @@ User Total Nutrition     : `GET /profile/nutrition/:userId`\
 User Progress Nutrition  : `GET /profile/nutrition/progress/:userId`\
 
 **- Food Route** \
-Food Tracker      : `POST /food/nutrition`\
+Food Nutrition Text Tracker      : `POST /food/nutrition`\
 
 ## Input in Each Route
 **-Login Route**
@@ -51,8 +51,9 @@ weight            Float
 height            Float
 ```
 
-**- Food Nutrition Route**
+**- Food Nutrition Text Route**
 ```
+userId              (string, required)
 foodName            (string, required)
 ```
 
@@ -156,19 +157,28 @@ foodName            (string, required)
 }
 ```
 
-**Food Tracker -> POST /food/nutrition**
+**Nutrition Text Tracker -> POST /food/nutrition**
 ```JSON
 {
   "status": 200,
   "message": "Success",
   "data": {
-    "foodName": "Omurice",
-    "foodInformation": "Omurice adalah hidangan Jepang yang terdiri dari nasi goreng yang dibalut dengan telur dadar tipis. Nasi goreng biasanya dibuat dengan kecap, saus, dan bumbu lainnya, dan sering kali diisi dengan daging atau sayuran. Telur dadar biasanya dibuat tipis dan lembut, dan disajikan di atas nasi goreng. Omurice merupakan makanan yang populer di Jepang dan di seluruh dunia, dan sering disajikan sebagai hidangan utama atau hidangan pembuka.",
-    "calorie": "500",
-    "sugar": "20",
-    "carbohydrate": "80",
-    "fat": "20",
-    "protein": "25"
+    "foodInfo": {
+      "foodName": "Nasi Padang",
+      "foodInformation": "Nasi Padang adalah hidangan khas Minangkabau, Sumatera Barat, yang terkenal dengan cita rasa rempah dan beragam lauk pauknya.",
+      "calorie": "300",
+      "sugar": "10",
+      "carbohydrate": "40",
+      "fat": "15",
+      "protein": "20"
+    },
+    "progressNutrition": {
+      "totalCalories": 1200,
+      "totalCarbohydrate": 180,
+      "totalProtein": 85,
+      "totalFat": 70,
+      "totalSugar": 40
+    }
   }
 }
 ```
