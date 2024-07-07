@@ -18,7 +18,19 @@ const calculateAge = (dateOfBirth) => {
     return date.getMonth(), date.getDate()
   } 
   
+const dayChecker = (update) => {
+    const lastUpdate = parseDateString(update)
+    const today = parseDateString(new Date())
+
+    if(lastUpdate === today){
+        return true
+    }else{
+        return false
+    }
+}
+
 module.exports = { 
     calculateAge,
     parseDateString,
+    dayChecker
 }

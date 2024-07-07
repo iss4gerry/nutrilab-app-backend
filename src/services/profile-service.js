@@ -2,6 +2,7 @@ const httpStatus = require('http-status')
 const prisma = require('../../prisma/index')
 const ApiError = require('../utils/apiError')
 const { calculateDailyNutrition, calculateProgressNutrition } = require('../utils/nutritionUtils')
+const { dayChecker } = require('../utils/dateUtils')
 
 const createProfile = async (body) => {
     try {
@@ -52,6 +53,21 @@ const getProgressNutrition = async (userId) => {
             userId: userId
         }
     })
+    
+    const today = dayChecker(nutrition.updatedAt)
+    if(!today){
+        const newNutrition = calculateDailyNutrition(user)
+        const resetNutrition = await prisma.nutrition.update({
+            where: {
+                userId: userId
+            },
+            data: {
+                ...newNutrition
+            }
+        })
+
+        return calculateProgressNutrition(user, resetNutrition)
+    }
 
     return calculateProgressNutrition(user, nutrition)
 }
