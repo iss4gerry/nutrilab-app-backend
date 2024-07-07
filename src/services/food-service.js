@@ -1,15 +1,18 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai')
 const ApiError = require('../utils/apiError')
 const httpStatus = require('http-status')
+const { calculateDailyNutrition, calculateProgressNutrition } = require('../utils/nutritionUtils')
+const prisma = require('../../prisma/index')
 const config = require('../config/config')
+const { dayChecker } = require('../utils/dateUtils')
 const apiKey = config.gemini.key
 const genAi = new GoogleGenerativeAI(apiKey)
 
-const foodTracker = async (body) => {
-    return new Promise((resolve, reject) => {
+const textTracker = async (foodName) => {
+    return new Promise(async (resolve, reject) => {
         const model = genAi.getGenerativeModel({model: 'gemini-1.5-flash'})
-        const prompt = `dari makanan ${body.foodName} analisis kandungan nutrisinya dengan nilai tetap (tanpa menggunakan rentang) dan tanpa menggunakan satuan (misalnya gram, kkal, dll) hanya gunakan angka total nutrisi yang terkandung. Jika ada yang tidak punya nilai isi dengan 0, 
-        kirim response dengan format string persis seperti dibawah ini tanpa tambahan apapun
+        const prompt = `dari makanan ${foodName} analisis kandungan nutrisinya dengan nilai tetap (tanpa menggunakan rentang) dan tanpa menggunakan satuan (misalnya gram, kkal, dll) hanya gunakan angka total nutrisi yang terkandung. Jika ada yang tidak punya nilai isi dengan 0, 
+        kirim response dengan format string persis seperti dibawah ini tanpa tambahan apapun, ingat jangan dikirim berformat json 
         {
             "foodName": "{food_name}",
             "foodInformation": "{food_information_dalambahasaindonesia_minimal25kata_maksimal30kata}",
@@ -20,14 +23,76 @@ const foodTracker = async (body) => {
             "protein": "{protein_content_grams}"
         }
         `
-        return model.generateContent(prompt)
-            .then(res => res.response)
-            .then(res => res.text())
-            .then(res => resolve(JSON.parse(res)))
-            .catch(err => reject(err))
+        try {
+            const result = await model.generateContent(prompt)
+            const response = await result.response.text()
+            return resolve(JSON.parse(response))
+        } catch (err) {
+            return reject(err)
+        }
     }) 
 }
 
+const nutritionTextTracker = async (body, userId) => {
+    const nutrition = await prisma.nutrition.findFirst({
+        where: {
+            userId: userId
+        }
+    })
+
+    const userProfile = await prisma.userProfile.findFirst({
+        where: {
+            userId: userId
+        }
+    })
+
+    const today = dayChecker(nutrition.updatedAt)
+    if(!today){
+
+        const resetNutrition = calculateDailyNutrition(userProfile)
+
+        await prisma.nutrition.update({
+            where: {
+                userId: userId
+            },
+            data: {
+                ...resetNutrition
+            }
+        })
+    }
+    
+    const food = await textTracker(body.foodName)
+    if(food){
+        const nutrition = await prisma.nutrition.findFirst({
+            where: {
+                userId: userId
+            }
+        })
+
+        const { calorie, sugar, carbohydrate, fat, protein } = food
+        const updateNutrition = await prisma.nutrition.update({
+            where: {
+                userId: userId
+            },
+            data:{
+                dailyCalorie: nutrition.dailyCalorie - calorie,
+                dailySugar: nutrition.dailySugar - sugar,
+                dailyCarbohydrate: nutrition.dailyCarbohydrate - carbohydrate,
+                dailyFat: nutrition.dailyFat - fat,
+                dailyProtein: nutrition.dailyProtein - protein
+            }
+        })
+
+        const resultData = {
+            foodInfo: food,
+            progressNutrition: calculateProgressNutrition(userProfile, updateNutrition)
+        }
+
+        return resultData
+    }
+}
+
 module.exports = {
-    foodTracker
+    textTracker,
+    nutritionTextTracker
 }
