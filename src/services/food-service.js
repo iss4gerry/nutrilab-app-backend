@@ -21,10 +21,10 @@ const foodTracker = async (body) => {
         }
         `
         return model.generateContent(prompt)
-                .then(res => res.response)
-                .then(res => res.text())
-                .then(res => resolve(JSON.parse(res)))
-                .catch(err => reject(err))
+            .then(res => res.response)
+            .then(res => res.text())
+            .then(res => resolve(JSON.parse(res)))
+            .catch(err => reject(err))
     }) 
 }
 
