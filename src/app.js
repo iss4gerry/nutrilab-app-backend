@@ -9,6 +9,7 @@ const swaggerJSDoc = require('swagger-jsdoc')
 
 const swaggerSpec = swaggerJSDoc(swaggerOption)
 const app = express()
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css"
 
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ limit: '10mb', extended: true }))
