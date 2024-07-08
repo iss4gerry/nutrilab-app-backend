@@ -33,7 +33,7 @@ const textTracker = async (foodName) => {
     }) 
 }
 
-const nutritionTextTracker = async (body, userId) => {
+const nutritionTracker = async (body, userId) => {
     const nutrition = await prisma.nutrition.findFirst({
         where: {
             userId: userId
@@ -94,5 +94,5 @@ const nutritionTextTracker = async (body, userId) => {
 
 module.exports = {
     textTracker,
-    nutritionTextTracker
+    nutritionTracker
 }
