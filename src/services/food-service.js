@@ -26,7 +26,13 @@ const textTracker = async (foodName) => {
         try {
             const result = await model.generateContent(prompt)
             const response = await result.response.text()
-            return resolve(JSON.parse(response))
+            const food = JSON.parse(response)
+            food.calorie = parseFloat(food.calorie)
+            food.sugar = parseFloat(food.sugar)
+            food.carbohydrate = parseFloat(food.carbohydrate)
+            food.fat = parseFloat(food.fat)
+            food.protein = parseFloat(food.protein)
+            return resolve(food)
         } catch (err) {
             return reject(err)
         }

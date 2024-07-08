@@ -2,6 +2,7 @@ const express = require('express')
 const foodRouter = require('./food-route')
 const authRouter = require('./auth-route')
 const profileRoute = require('./profile-route')
+const historyRoute = require('./history-route')
 
 const router = express.Router()
 
@@ -17,6 +18,10 @@ const defaultRoutes = [
     {
         path: '/profile',
         route: profileRoute
+    },
+    {
+        path: '/history',
+        route: historyRoute
     }
 ]
 
