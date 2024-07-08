@@ -69,7 +69,7 @@ const nutritionTracker = async (body, userId) => {
             }
         })
 
-        const { calorie, sugar, carbohydrate, fat, protein } = food
+        const { foodName, foodInformation, calorie, sugar, carbohydrate, fat, protein } = food
         const updateNutrition = await prisma.nutrition.update({
             where: {
                 userId: userId
@@ -80,6 +80,19 @@ const nutritionTracker = async (body, userId) => {
                 dailyCarbohydrate: nutrition.dailyCarbohydrate - carbohydrate,
                 dailyFat: nutrition.dailyFat - fat,
                 dailyProtein: nutrition.dailyProtein - protein
+            }
+        })
+
+        await prisma.history.create({
+            data: {
+                userId: userId,
+                foodName: foodName,
+                foodInformation: foodInformation,
+                totalCalorie: calorie,
+                totalSugar: sugar,
+                totalCarbohydrate: carbohydrate,
+                totalFat: fat,
+                totalProtein: protein
             }
         })
 
