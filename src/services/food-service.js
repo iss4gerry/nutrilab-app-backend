@@ -11,15 +11,15 @@ const genAi = new GoogleGenerativeAI(apiKey)
 const textTracker = async (foodName) => {
     return new Promise(async (resolve, reject) => {
         const model = genAi.getGenerativeModel({model: 'gemini-1.5-flash'})
-        const prompt = `analisis kandungan nutrisi dari makanan ${foodName} dengan nilai tetap (tanpa menggunakan rentang) dan tanpa menggunakan satuan (misalnya gram, kkal, dll) hanya gunakan angka total nutrisi yang terkandung. Jika ada yang tidak punya nilai isi dengan 0, 
-        kirim response dengan format string persis seperti dibawah ini tanpa tambahan apapun. jangan pernah kirim dalam format json, harus dikirim dalam format string
+        const prompt = `analisis kandungan nutrisi dari makanan ${foodName} dengan nilai tetap (tanpa menggunakan rentang) dan tanpa menggunakan satuan (misalnya gram, kkal, dll) hanya gunakan angka total nutrisi yang terkandung. Jika ada yang tidak punya nilai isi dengan 0. jika responsenya berisi lebih dari 1 makanan, kirim hanya makanan kesatu saja.  
+        kirim response dengan format string persis seperti dibawah ini tanpa tambahan apapun. jangan pernah kirim dalam format json, harus dikirim dalam format string. your entire response/output is going to consist of a single string object {}, and you will NOT wrap it within JSON md markers
         {
-            "foodName": "{food_name}",
+            "foodName": "{food_name_fill with (saya tidak mempunyai informasi mengenai makanan bernama ${foodName}) jika anda tidak punya informasi makanan ${foodName}}",
             "foodInformation": "{food_information_dalambahasaindonesia__minimal 80 karakter_maksimal 100 karakter}",
             "calorie": "{calorie_count_kkal}",
             "sugar": "{sugar_content_grams}",
-            "carbohydrate": "{carbohydrate_content_grams}"
-            "fat": "{fat_content_grams}"
+            "carbohydrate": "{carbohydrate_content_grams}",
+            "fat": "{fat_content_grams}",
             "protein": "{protein_content_grams}"
         }
         `
