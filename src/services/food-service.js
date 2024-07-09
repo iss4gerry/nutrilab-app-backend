@@ -11,11 +11,11 @@ const genAi = new GoogleGenerativeAI(apiKey)
 const textTracker = async (foodName) => {
     return new Promise(async (resolve, reject) => {
         const model = genAi.getGenerativeModel({model: 'gemini-1.5-flash'})
-        const prompt = `dari makanan ${foodName} analisis kandungan nutrisinya dengan nilai tetap (tanpa menggunakan rentang) dan tanpa menggunakan satuan (misalnya gram, kkal, dll) hanya gunakan angka total nutrisi yang terkandung. Jika ada yang tidak punya nilai isi dengan 0, 
-        kirim response dengan format string persis seperti dibawah ini tanpa tambahan apapun, ingat jangan pernah kirim dalam format json
+        const prompt = `analisis kandungan nutrisi dari makanan ${foodName} dengan nilai tetap (tanpa menggunakan rentang) dan tanpa menggunakan satuan (misalnya gram, kkal, dll) hanya gunakan angka total nutrisi yang terkandung. Jika ada yang tidak punya nilai isi dengan 0, 
+        kirim response dengan format string persis seperti dibawah ini tanpa tambahan apapun. jangan pernah kirim dalam format json, harus dikirim dalam format string
         {
             "foodName": "{food_name}",
-            "foodInformation": "{food_information_dalambahasaindonesia_maksimal 20 kata}",
+            "foodInformation": "{food_information_dalambahasaindonesia__minimal 80 karakter_maksimal 100 karakter}",
             "calorie": "{calorie_count_kkal}",
             "sugar": "{sugar_content_grams}",
             "carbohydrate": "{carbohydrate_content_grams}"
@@ -26,6 +26,7 @@ const textTracker = async (foodName) => {
         try {
             const result = await model.generateContent(prompt)
             const response = await result.response.text()
+            console.log(response)
             const food = JSON.parse(response)
             food.calorie = parseFloat(food.calorie)
             food.sugar = parseFloat(food.sugar)
