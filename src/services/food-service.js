@@ -40,75 +40,81 @@ const textTracker = async (foodName) => {
 }
 
 const nutritionTracker = async (body, userId) => {
-    const nutrition = await prisma.nutrition.findFirst({
-        where: {
-            userId: userId
-        }
-    })
 
-    const userProfile = await prisma.userProfile.findFirst({
-        where: {
-            userId: userId
-        }
-    })
-
-    const today = dayChecker(nutrition.updatedAt)
-    if(!today){
-
-        const resetNutrition = calculateDailyNutrition(userProfile)
-
-        await prisma.nutrition.update({
-            where: {
-                userId: userId
-            },
-            data: {
-                ...resetNutrition
-            }
-        })
-    }
-    
-    const food = await textTracker(body.foodName)
-    if(food){
+    try {
         const nutrition = await prisma.nutrition.findFirst({
             where: {
                 userId: userId
             }
         })
-
-        const { foodName, foodInformation, calorie, sugar, carbohydrate, fat, protein } = food
-        const updateNutrition = await prisma.nutrition.update({
+    
+        const userProfile = await prisma.userProfile.findFirst({
             where: {
                 userId: userId
-            },
-            data:{
-                dailyCalorie: nutrition.dailyCalorie - calorie,
-                dailySugar: nutrition.dailySugar - sugar,
-                dailyCarbohydrate: nutrition.dailyCarbohydrate - carbohydrate,
-                dailyFat: nutrition.dailyFat - fat,
-                dailyProtein: nutrition.dailyProtein - protein
             }
         })
-
-        await prisma.history.create({
-            data: {
-                userId: userId,
-                foodName: foodName,
-                foodInformation: foodInformation,
-                totalCalorie: calorie,
-                totalSugar: sugar,
-                totalCarbohydrate: carbohydrate,
-                totalFat: fat,
-                totalProtein: protein
-            }
-        })
-
-        const resultData = {
-            foodInfo: food,
-            progressNutrition: calculateProgressNutrition(userProfile, updateNutrition)
+    
+        const today = dayChecker(nutrition.updatedAt)
+        if(!today){
+    
+            const resetNutrition = calculateDailyNutrition(userProfile)
+    
+            await prisma.nutrition.update({
+                where: {
+                    userId: userId
+                },
+                data: {
+                    ...resetNutrition
+                }
+            })
         }
-
-        return resultData
+        
+        const food = await textTracker(body.foodName)
+        if(food){
+            const nutrition = await prisma.nutrition.findFirst({
+                where: {
+                    userId: userId
+                }
+            })
+    
+            const { foodName, foodInformation, calorie, sugar, carbohydrate, fat, protein } = food
+            const updateNutrition = await prisma.nutrition.update({
+                where: {
+                    userId: userId
+                },
+                data:{
+                    dailyCalorie: nutrition.dailyCalorie - calorie,
+                    dailySugar: nutrition.dailySugar - sugar,
+                    dailyCarbohydrate: nutrition.dailyCarbohydrate - carbohydrate,
+                    dailyFat: nutrition.dailyFat - fat,
+                    dailyProtein: nutrition.dailyProtein - protein
+                }
+            })
+    
+            await prisma.history.create({
+                data: {
+                    userId: userId,
+                    foodName: foodName,
+                    foodInformation: foodInformation,
+                    totalCalorie: calorie,
+                    totalSugar: sugar,
+                    totalCarbohydrate: carbohydrate,
+                    totalFat: fat,
+                    totalProtein: protein
+                }
+            })
+    
+            const resultData = {
+                foodInfo: food,
+                progressNutrition: calculateProgressNutrition(userProfile, updateNutrition)
+            }
+    
+            return resultData
+        }
+    } catch (error) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error)
     }
+   
 }
 
 module.exports = {
