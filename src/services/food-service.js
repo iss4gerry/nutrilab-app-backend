@@ -12,10 +12,10 @@ const textTracker = async (foodName) => {
     return new Promise(async (resolve, reject) => {
         const model = genAi.getGenerativeModel({model: 'gemini-1.5-flash'})
         const prompt = `dari makanan ${foodName} analisis kandungan nutrisinya dengan nilai tetap (tanpa menggunakan rentang) dan tanpa menggunakan satuan (misalnya gram, kkal, dll) hanya gunakan angka total nutrisi yang terkandung. Jika ada yang tidak punya nilai isi dengan 0, 
-        kirim response dengan format string persis seperti dibawah ini tanpa tambahan apapun, ingat jangan dikirim berformat json 
+        kirim response dengan format string persis seperti dibawah ini tanpa tambahan apapun, ingat jangan pernah kirim dalam format json
         {
             "foodName": "{food_name}",
-            "foodInformation": "{food_information_dalambahasaindonesia_minimal25kata_maksimal30kata}",
+            "foodInformation": "{food_information_dalambahasaindonesia_maksimal 20 kata}",
             "calorie": "{calorie_count_kkal}",
             "sugar": "{sugar_content_grams}",
             "carbohydrate": "{carbohydrate_content_grams}"
