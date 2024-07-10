@@ -6,7 +6,7 @@ router
     .route('/').post(profileController.createProfile)
 
 router
-    .route('/:userId').get(profileController.getProfileById)
+    .route('/:userId').get(profileController.getProfileById).patch(profileController.updateProfile)
 
 router  
     .route('/nutrition/:userId').get(profileController.getTotalNutrition)

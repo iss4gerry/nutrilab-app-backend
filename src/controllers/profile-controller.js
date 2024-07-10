@@ -42,9 +42,20 @@ const getProfileById = catchAsync(async (req, res) => {
     })
 })
 
+const updateProfile = catchAsync(async (req, res) => {
+    const result = await profileService.updateProfile(req.body, req.params.userId)
+
+    res.status(httpStatus.OK).send({
+        status: httpStatus.OK,
+        message: 'Success',
+        data: result
+    })
+})
+
 module.exports = {
     createProfile,
     getTotalNutrition,
     getProgressNutrition,
     getProfileById,
+    updateProfile
 }

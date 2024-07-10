@@ -94,9 +94,37 @@ const getProfileById = async(userId) => {
     return result
 }
 
+const updateProfile = async(body, userId) => {
+    const user = await prisma.userProfile.update({
+        where: {
+            userId: userId
+        },
+        data: {
+            ...body
+        }
+    })
+
+    const newNutrition = calculateDailyNutrition(user)
+
+    const nutrition = await prisma.nutrition.update({
+        where: {
+            userId: userId
+        },
+        data: {
+            ...newNutrition
+        }
+    })
+
+    return {
+        profile: user,
+        newNutrition: nutrition
+    }
+}
+
 module.exports = {
     createProfile,
     getTotalNutrition,
     getProgressNutrition,
     getProfileById,
+    updateProfile
 }
