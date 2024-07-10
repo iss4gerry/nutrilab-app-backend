@@ -148,15 +148,31 @@ const getFoodRecommendation = async(userId) => {
     {
     "food1": {
         "foodName": "{makanan}",
-        "information": "{keterangan}"
+        "information": "{keterangan}",
+        "calorie": "{calorie_count_kkal}",
+        "sugar": "{sugar_content_grams}",
+        "carbohydrate": "{carbohydrate_content_grams}",
+        "fat": "{fat_content_grams}",
+        "protein": "{protein_content_grams}"
+        
     },
     "food2": {
         "foodName": "{makanan}",
-        "information": "{keterangan}"
+        "information": "{keterangan}",
+        "calorie": "{calorie_count_kkal}",
+        "sugar": "{sugar_content_grams}",
+        "carbohydrate": "{carbohydrate_content_grams}",
+        "fat": "{fat_content_grams}",
+        "protein": "{protein_content_grams}"
     },
     "food3": {
         "foodName": "{makanan}",
-        "information": "{keterangan}"
+        "information": "{keterangan}",
+        "calorie": "{calorie_count_kkal}",
+        "sugar": "{sugar_content_grams}",
+        "carbohydrate": "{carbohydrate_content_grams}",
+        "fat": "{fat_content_grams}",
+        "protein": "{protein_content_grams}"
     }
 }
     `
