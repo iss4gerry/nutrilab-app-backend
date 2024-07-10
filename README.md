@@ -258,15 +258,30 @@ userId              (string, required)
   "data": {
     "food1": {
       "foodName": "Salmon Panggang dengan Sayuran",
-      "information": "Salmon kaya akan protein dan asam lemak omega-3 yang baik untuk kesehatan jantung. Panggang salmon dengan sayuran seperti brokoli, asparagus, dan paprika untuk nutrisi tambahan. Anda dapat menambahkan sedikit minyak zaitun dan bumbu favorit Anda."
+      "information": "Salmon kaya akan protein dan asam lemak omega-3, baik untuk kesehatan jantung. Panggang salmon dengan sedikit minyak zaitun dan tambahkan sayuran seperti brokoli, asparagus, atau kembang kol.",
+      "calorie": "300",
+      "sugar": "0",
+      "carbohydrate": "10",
+      "fat": "20",
+      "protein": "30"
     },
     "food2": {
-      "foodName": "Sup Sayur",
-      "information": "Sup sayur adalah pilihan yang sehat dan mengenyangkan. Buat sup dengan berbagai macam sayuran, seperti wortel, kentang, brokoli, kembang kol, dan bayam. Anda dapat menambahkan sedikit protein seperti ayam atau daging sapi cincang untuk menambah nutrisi."
+      "foodName": "Salad Quinoa dengan Sayuran dan Biji-bijian",
+      "information": "Quinoa adalah sumber protein dan serat yang baik. Campurkan quinoa dengan sayuran seperti tomat, mentimun, dan selada, serta biji-bijian seperti chia seed dan biji bunga matahari.",
+      "calorie": "250",
+      "sugar": "5",
+      "carbohydrate": "30",
+      "fat": "10",
+      "protein": "15"
     },
     "food3": {
-      "foodName": "Salad Buah dengan Yogurt",
-      "information": "Salad buah adalah sumber vitamin dan mineral yang baik. Gunakan buah-buahan segar seperti stroberi, blueberry, kiwi, dan pisang. Tambahkan yogurt tawar untuk protein dan kalsium. Hindari menambahkan gula tambahan."
+      "foodName": "Smoothie Buah dengan Susu Almond",
+      "information": "Smoothie ini kaya akan vitamin dan mineral dari buah-buahan. Gunakan buah-buahan seperti pisang, stroberi, dan blueberry, dan tambahkan susu almond untuk tambahan protein.",
+      "calorie": "200",
+      "sugar": "20",
+      "carbohydrate": "30",
+      "fat": "5",
+      "protein": "10"
     }
   }
 }
