@@ -21,6 +21,7 @@ User Login: `POST /auth/login`\
 
 **- Profile Route** \
 Create Profile           : `POST /profile`\
+Edit Profile             : `PATCH /profile/:userId`\
 Get Profile              : `GET /profile/:userId`\
 User Total Nutrition     : `GET /profile/nutrition/:userId`\
 User Progress Nutrition  : `GET /profile/nutrition/progress/:userId`\
@@ -154,6 +155,38 @@ userId              (string, required)
     "user": {
       "name": "mayu",
       "email": "mayu@gmail.com"
+    }
+  }
+}
+```
+
+**Edit Profile -> PATCH /profile/:userId**
+```json
+{
+  "status": 200,
+  "message": "Success",
+  "data": {
+    "profile": {
+      "id": "55eb2d39-22ac-465e-a633-4efb2b2701cf",
+      "userId": "20aefb60-905b-443e-9189-e74eb5c246ca",
+      "gender": "male",
+      "dateOfBirth": "2000-12-20",
+      "allergies": "Tidak Punya",
+      "weight": 58,
+      "height": 175,
+      "createdAt": "2024-07-07T03:12:47.691Z",
+      "updatedAt": "2024-07-10T04:32:34.506Z"
+    },
+    "newNutrition": {
+      "id": "21894711-8342-441f-a457-009966dfccba",
+      "userId": "20aefb60-905b-443e-9189-e74eb5c246ca",
+      "dailyCalorie": 1584.275,
+      "dailyCarbohydrate": 237.64125,
+      "dailySugar": 50,
+      "dailyFat": 316.855,
+      "dailyProtein": 46.40000000000001,
+      "createdAt": "2024-07-07T03:12:48.774Z",
+      "updatedAt": "2024-07-10T04:32:35.590Z"
     }
   }
 }
