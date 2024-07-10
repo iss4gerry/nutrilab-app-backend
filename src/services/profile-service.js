@@ -12,6 +12,7 @@ const createProfile = async (body) => {
 
         if(userProfile){
             const dailyNutrition = calculateDailyNutrition(userProfile)
+            console.log(dailyNutrition)
             const nutrition = await prisma.nutrition.create({
                 data: {
                     userId: body.userId,
