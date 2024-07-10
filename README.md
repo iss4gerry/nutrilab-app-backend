@@ -61,6 +61,11 @@ userId              (string, required)
 foodName            (string, required)
 ```
 
+**- History Route**
+```
+userId              (string, required)
+```
+
 ## Sucessfull Response API
 **Register User -> POST /auth/register**
 ```json
