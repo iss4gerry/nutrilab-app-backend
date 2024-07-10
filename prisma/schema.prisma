@@ -35,8 +35,8 @@ model UserProfile {
   gender            String
   dateOfBirth       String       
   allergies         String?       @default("Tidak Punya")     
-  weight            Float
-  height            Float
+  weight            Int
+  height            Int
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt 
 }
@@ -45,11 +45,11 @@ model Nutrition {
   id                String       @id @default(uuid())
   userId            String       @unique
   user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)   
-  dailyCalorie      Float
-  dailyCarbohydrate Float
-  dailySugar        Float
-  dailyFat          Float
-  dailyProtein      Float
+  dailyCalorie      Int
+  dailyCarbohydrate Int
+  dailySugar        Int
+  dailyFat          Int
+  dailyProtein      Int
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
 }
@@ -60,11 +60,11 @@ model History {
   user                   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   foodName               String
   foodInformation        String
-  totalCalorie           Float
-  totalCarbohydrate      Float
-  totalSugar             Float
-  totalFat               Float
-  totalProtein           Float
+  totalCalorie           Int
+  totalCarbohydrate      Int
+  totalSugar             Int
+  totalFat               Int
+  totalProtein           Int
   date                   DateTime     @default(now())
   favorites              Favorite[]
 }
