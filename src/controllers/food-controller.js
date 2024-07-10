@@ -12,6 +12,17 @@ const textTracker = catchAsync(async (req, res) => {
     })
 })
 
+const getFoodRecommendation = catchAsync(async (req, res) => {
+    const result = await foodService.getFoodRecommendation(req.params.userId)
+
+    res.status(httpStatus.OK).send({
+        status: httpStatus.OK,
+        message: 'Success',
+        data: result
+    })
+})
+
 module.exports = {
-    textTracker
+    textTracker,
+    getFoodRecommendation
 }

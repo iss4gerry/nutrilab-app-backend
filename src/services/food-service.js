@@ -118,7 +118,61 @@ const nutritionTracker = async (body, userId) => {
    
 }
 
+const getFoodRecommendation = async(userId) => {
+    const user = await prisma.user.findFirst({
+        where: {
+            id: userId
+        },
+        include: {
+            profile:{
+                select:{
+                    allergies: true
+                }
+            },
+            nutrition: true
+        }
+    })
+
+    if(!user){
+        throw new ApiError(httpStatus.BAD_REQUEST, 'User not found')
+    }
+
+    const prompt = `rekomendasikan saya 3 makanan jika berikut adalah sisa kebutuhan harian saya 
+    kalori: ${user.nutrition.dailyCalorie},
+    karbohidrat: ${user.nutrition.dailyCarbohydrate},
+    lemak: ${user.nutrition.dailyFat},
+    protein: ${user.nutrition.dailyProtein},
+    batas gula harian : ${user.nutrition.dailySugar},
+    riwayat alergi: ${user.profile.allergies}
+    kirim response dalam format string dibawah ini, your entire response/output is going to consist of a single string object {}, and you will NOT wrap it within JSON md markers
+    {
+    "food1": {
+        "foodName": "{makanan}",
+        "information": "{keterangan}"
+    },
+    "food2": {
+        "foodName": "{makanan}",
+        "information": "{keterangan}"
+    },
+    "food3": {
+        "foodName": "{makanan}",
+        "information": "{keterangan}"
+    }
+}
+    `
+
+    const model = genAi.getGenerativeModel({model: 'gemini-1.5-flash'})
+    const result = await model.generateContent(prompt)
+    const response = await result.response
+    const text = response.text()
+    const stringResponse = JSON.parse(text)
+
+    return stringResponse
+
+}
+
 module.exports = {
     textTracker,
-    nutritionTracker
+    nutritionTracker,
+    getFoodRecommendation
 }
