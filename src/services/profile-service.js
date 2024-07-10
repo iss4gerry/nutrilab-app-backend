@@ -72,8 +72,31 @@ const getProgressNutrition = async (userId) => {
     return calculateProgressNutrition(user, nutrition)
 }
 
+const getProfileById = async(userId) => {
+    const result = await prisma.userProfile.findFirst({
+        where: {
+            userId:userId
+        },
+        include: {
+            user: {
+                select: {
+                    name:true,
+                    email: true
+                }
+            }
+        }
+    })
+
+    if(!result){
+        throw new ApiError(httpStatus.BAD_REQUEST, 'User not found')
+    }
+
+    return result
+}
+
 module.exports = {
     createProfile,
     getTotalNutrition,
-    getProgressNutrition
+    getProgressNutrition,
+    getProfileById,
 }

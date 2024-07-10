@@ -126,6 +126,30 @@ foodName            (string, required)
 }
 ```
 
+**Get Profile  -> GET /profile/:userId**
+```json
+{
+  "status": 200,
+  "message": "Success",
+  "data": {
+    "id": "55eb2d39-22ac-465e-a633-4efb2b2701cf",
+    "userId": "20aefb60-905b-443e-9189-e74eb5c246ca",
+    "gender": "male",
+    "dateOfBirth": "2003-12-20",
+    "allergies": "Tidak Punya",
+    "weight": 57,
+    "height": 172,
+    "createdAt": "2024-07-07T03:12:47.691Z",
+    "updatedAt": "2024-07-07T03:12:47.691Z",
+    "user": {
+      "name": "mayu",
+      "email": "mayu@gmail.com"
+    }
+  }
+}
+```
+
+
 **Get Total Nutrition -> GET /profile/nutrition/:userId**
 ```json
 {
@@ -180,6 +204,28 @@ foodName            (string, required)
       "totalSugar": 40
     }
   }
+}
+```
+
+**Get History -> GET /history/:userId**
+```json
+{
+  "status": 200,
+  "message": "Success",
+  "data": [
+    {
+      "id": "17a0b27f-f545-45a0-ba78-03f013fa1310",
+      "userId": "20aefb60-905b-443e-9189-e74eb5c246ca",
+      "foodName": "Nasi Padang",
+      "foodInformation": "Nasi Padang adalah hidangan khas Sumatera Barat yang terdiri dari nasi putih dan berbagai lauk pauk, seperti rendang, ayam goreng, ikan bakar, dan sayur-sayuran.",
+      "totalCalorie": 350,
+      "totalCarbohydrate": 50,
+      "totalSugar": 10,
+      "totalFat": 20,
+      "totalProtein": 25,
+      "date": "2024-07-08T04:16:50.683Z"
+    }
+  ]
 }
 ```
 

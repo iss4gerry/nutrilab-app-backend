@@ -5,6 +5,9 @@ const router = express.Router()
 router  
     .route('/').post(profileController.createProfile)
 
+router
+    .route('/:userId').get(profileController.getProfileById)
+
 router  
     .route('/nutrition/:userId').get(profileController.getTotalNutrition)
 
