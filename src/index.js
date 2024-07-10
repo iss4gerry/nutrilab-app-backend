@@ -1,8 +1,11 @@
 const app = require('./app')
 const config = require('./config/config')
+const prisma = require('../prisma/index')
 
-app.listen(config.port, () => {
-    console.log(`running on port ${config.port}`)
-})
+if(prisma){
+    app.listen(config.port, () => {
+        console.log(`running on port ${config.port}`)
+    })
+}
 
 module.exports = app
