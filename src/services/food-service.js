@@ -79,7 +79,7 @@ const nutritionTracker = async (body, userId) => {
             })
     
             const { foodName, foodInformation, calorie, sugar, carbohydrate, fat, protein } = food
-            const updateNutrition = await prisma.nutrition.update({
+            await prisma.nutrition.update({
                 where: {
                     userId: userId
                 },
@@ -107,7 +107,7 @@ const nutritionTracker = async (body, userId) => {
     
             const resultData = {
                 foodInfo: food,
-                progressNutrition: calculateProgressNutrition(userProfile, updateNutrition)
+                totalNutritionNeeded: calculateDailyNutrition(userProfile)
             }
     
             return resultData
