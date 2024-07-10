@@ -21,11 +21,15 @@ User Login: `POST /auth/login`\
 
 **- Profile Route** \
 Create Profile           : `POST /profile`\
+Get Profile              : `GET /profile/:userId`\
 User Total Nutrition     : `GET /profile/nutrition/:userId`\
 User Progress Nutrition  : `GET /profile/nutrition/progress/:userId`\
 
 **- Food Route** \
 Food Nutrition Text Tracker      : `POST /food/nutrition`\
+
+**- History Route** \
+Get User History                 : `GET /history/:userId`\
 
 ## Input in Each Route
 **-Login Route**
