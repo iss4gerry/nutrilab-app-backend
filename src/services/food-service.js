@@ -54,6 +54,10 @@ const nutritionTracker = async (body, userId) => {
                 userId: userId
             }
         })
+
+        if(!userProfile){
+            throw new ApiError(httpStatus.BAD_REQUEST, 'Please complete your profile first')
+        }
     
         const today = dayChecker(nutrition.updatedAt)
         if(!today){
@@ -135,6 +139,10 @@ const getFoodRecommendation = async(userId) => {
 
     if(!user){
         throw new ApiError(httpStatus.BAD_REQUEST, 'User not found')
+    }
+
+    if(!user.profile){
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Please complete your profile first')
     }
 
     const prompt = `rekomendasikan saya 3 makanan jika berikut adalah sisa kebutuhan harian saya 
