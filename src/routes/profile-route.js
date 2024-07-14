@@ -8,7 +8,7 @@ router
     .route('/').post(validate(profileValidation.createProfile), profileController.createProfile)
 
 router
-    .route('/:userId').get(profileController.getProfileById).patch(profileController.updateProfile)
+    .route('/:userId').get(validate(profileValidation.getProfileById), profileController.getProfileById).patch(validate(profileValidation.updateProfile), profileController.updateProfile)
 
 router  
     .route('/nutrition/:userId').get(profileController.getTotalNutrition)
