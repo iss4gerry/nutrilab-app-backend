@@ -30,9 +30,16 @@ const updateProfile = {
         height: Joi.number()
     })
 }
+
+const getNutrition = {
+    params: Joi.object().keys({
+        userId: Joi.string().custom(objectId)
+    })
+}
+
 module.exports = {
     createProfile,
     getProfileById, 
     updateProfile,
-
+    getNutrition
 }

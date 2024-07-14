@@ -11,9 +11,9 @@ router
     .route('/:userId').get(validate(profileValidation.getProfileById), profileController.getProfileById).patch(validate(profileValidation.updateProfile), profileController.updateProfile)
 
 router  
-    .route('/nutrition/:userId').get(profileController.getTotalNutrition)
+    .route('/nutrition/:userId').get(validate(profileValidation.getNutrition), profileController.getTotalNutrition)
 
 router
-    .route('/nutrition/progress/:userId').get(profileController.getProgressNutrition)
+    .route('/nutrition/progress/:userId').get(validate(profileValidation.getNutrition), profileController.getProgressNutrition)
 
 module.exports = router
