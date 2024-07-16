@@ -6,6 +6,11 @@ const { dayChecker } = require('../utils/dateUtils')
 
 const createProfile = async (body) => {
     try {
+
+        if(body.allergies === ''){
+            body.allergies = 'tidak punya'
+        }
+        
         const userProfile = await prisma.userProfile.create({
             data: body
         })
