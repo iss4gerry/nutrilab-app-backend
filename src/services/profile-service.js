@@ -10,7 +10,7 @@ const createProfile = async (body) => {
         if(body.allergies === ''){
             body.allergies = 'tidak punya'
         }
-        
+
         const userProfile = await prisma.userProfile.create({
             data: body
         })
@@ -127,10 +127,20 @@ const updateProfile = async(body, userId) => {
     }
 }
 
+const deleteProfile = async(userId) => {
+
+    return await prisma.userProfile.delete({
+        where: {
+            userId: userId
+        }
+    })
+}
+
 module.exports = {
     createProfile,
     getTotalNutrition,
     getProgressNutrition,
     getProfileById,
-    updateProfile
+    updateProfile,
+    deleteProfile
 }

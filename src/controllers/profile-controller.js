@@ -52,10 +52,21 @@ const updateProfile = catchAsync(async (req, res) => {
     })
 })
 
+const deleteProfile = catchAsync(async (req, res) => {
+    const result = await profileService.deleteProfile(req.params.userId)
+
+    res.status(httpStatus.OK).send({
+        status: httpStatus.OK,
+        message: 'Success',
+        data: result
+    })
+})
+
 module.exports = {
     createProfile,
     getTotalNutrition,
     getProgressNutrition,
     getProfileById,
-    updateProfile
+    updateProfile,
+    deleteProfile
 }

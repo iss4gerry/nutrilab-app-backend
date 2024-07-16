@@ -7,7 +7,7 @@ const calculateAge = (dateOfBirth) => {
     if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
       age--
     }
-    
+    console.log(today + '===+++===+++===' + dob)
     return age
   
   }

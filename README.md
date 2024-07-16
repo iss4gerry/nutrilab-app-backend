@@ -93,13 +93,13 @@ userId              (string, required)
   "status": 200,
   "message": "Success",
   "data": {
-    "id": "7fd96354-da07-4420-8272-4f9a3df5f425",
-    "name": "gerry",
-    "email": "gerry",
-    "password": "$2a$08$c7ohbZar4gRBTARnr1e5guy/flMP9H1Yc6HANNu3q4Y5/Zvg5IC2.",
-    "role": "user",
-    "createdAt": "2024-06-14T04:46:25.371Z",
-    "updatedAt": "2024-06-14T04:46:25.371Z",
+    "id": "20aefb60-905b-443e-9189-e74eb5c246ca",
+    "name": "mayu",
+    "email": "mayu@gmail.com",
+    "password": "$2a$09$wZ./bDz1aYkA46ZFHAuRSe3XGMH1b2zFZzN5fCDNmjBfBEXtQMThu",
+    "role": "admin",
+    "createdAt": "2024-07-05T12:54:34.000Z",
+    "updatedAt": "2024-07-05T12:54:34.000Z",
     "isEmailVerified": false
   }
 }
