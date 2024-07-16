@@ -2,9 +2,9 @@ const { calculateAge } = require('./dateUtils')
 
 const calculateCalories = (gender, weight, height, age) => {
     let calories
-    if (gender === 'male') {
+    if (gender.toLowerCase() === 'male') {
       calories = Math.round(66.5 + (13.75 * weight) + (5.003 * height) - (6.75 * age))
-    } else if (gender === 'female') {
+    } else if (gender.toLowerCase() === 'female') {
       calories = Math.round(655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age))
     } else {
       throw new Error('Invalid gender. Please specify "male" or "female".')

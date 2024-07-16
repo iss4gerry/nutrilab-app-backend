@@ -6,7 +6,7 @@ const createProfile = {
         userId: Joi.string().custom(objectId).required(),
         gender: Joi.string().required(),
         dateOfBirth: Joi.string().required(),
-        allergies: Joi.string(),
+        allergies: Joi.string().optional().allow(''),
         weight: Joi.number().required(),
         height: Joi.number().required()
     })
@@ -25,7 +25,7 @@ const updateProfile = {
     body: Joi.object().keys({
         gender: Joi.string(),
         dateOfBirth: Joi.string(),
-        allergies: Joi.string(),
+        allergies: Joi.string().optional().allow(''),
         weight: Joi.number(),
         height: Joi.number()
     })
