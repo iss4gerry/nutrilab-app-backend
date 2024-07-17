@@ -23,11 +23,11 @@ const updateProfile = {
         userId: Joi.string().custom(objectId)
     }),
     body: Joi.object().keys({
-        gender: Joi.string(),
-        dateOfBirth: Joi.string(),
+        gender: Joi.string().optional(),
+        dateOfBirth: Joi.string().optional(),
         allergies: Joi.string().optional().allow(''),
-        weight: Joi.number(),
-        height: Joi.number()
+        weight: Joi.number().optional(),
+        height: Joi.number().optional()
     })
 }
 
