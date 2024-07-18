@@ -4,7 +4,7 @@ const { objectId } = require('./custom-validation')
 const textTracker = {
     body: Joi.object().keys({
         foodName: Joi.string().required(),
-        userId: Joi.string().custom(objectId)
+        userId: Joi.string().custom(objectId).required()
     })
 }
 
